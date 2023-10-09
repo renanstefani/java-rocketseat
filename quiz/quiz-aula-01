@@ -1,0 +1,32 @@
+Question 1.
+Qual é a função principal do Maven no desenvolvimento da aplicação?
+Sua resposta
+Gerenciar dependências e fazer o build
+
+
+
+Question 2.
+Qual é a diferença entre empacotamento via JAR e via WAR em uma aplicação Spring Boot?
+Sua resposta
+O empacotamento via WAR requer um servidor para rodar a aplicação, enquanto o empacotamento via JAR não
+
+
+
+Question 3.
+Qual é o propósito de uma controller no contexto do Spring Boot?
+Sua resposta
+Processar as requisições HTTP e atuar como a primeira camada de acesso do usuário à aplicação
+
+
+
+Question 4.
+O que significa quando um atributo de uma classe está definido como "private"?
+Sua resposta
+O atributo pode ser acessado apenas pela própria classe
+
+
+
+Question 5.
+Qual é a forma de acessar atributos dentro de uma classe que estão definidos como "private", segundo o que será abordado na próxima aula?
+Sua resposta
+Acesso através de métodos públicos na classe que retornam ou modificam o atributo.
