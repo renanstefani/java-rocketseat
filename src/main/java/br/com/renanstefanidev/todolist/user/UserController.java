@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping("/")
     public void create(@RequestBody UserModel userModel) {
         // @RequestBody aponta que UserModel está no body da requisição
-        System.out.println(userModel.name);
+        System.out.println(userModel.getUsername());
     }
     
 }
