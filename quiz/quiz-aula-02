@@ -1,0 +1,46 @@
+Question 1.
+O que significa quando um atributo de uma classe está definido como "private"?
+Sua resposta
+O atributo pode ser acessado apenas pela própria classe
+
+
+
+Question 2.
+Qual é a forma de acessar atributos dentro de uma classe que estão definidos como "private"?
+Sua resposta
+Acesso através de métodos públicos na classe que retornam ou modificam o atributo.
+
+
+
+Question 3.
+O que são os métodos "getters" e "setters" em Java, de acordo com a explicação dada na aula?
+Sua resposta
+"Getters" são usados para recuperar valores de atributos de uma classe, enquanto "setters" são usados para definir valores para esses atributos.
+
+
+
+Question 4.
+Qual é a função da annotation @RequestBody no Spring Boot, conforme explicado na aula?
+Sua resposta
+Indica que os dados da requisição estarão no corpo da mensagem e serão convertidos para o objeto especificado no parâmetro do método.
+
+
+
+Question 5.
+O que é o Lombok no contexto do Java, de acordo com a explicação na aula?
+Sua resposta
+Uma biblioteca que facilita a criação de getters e setters no Java, entre outros métodos.
+
+
+
+Question 6.
+Qual é a função da annotation @Data do Lombok mencionada na aula?
+Sua resposta
+Facilitar a criação de getters e setters para todos os atributos de uma classe.
+
+
+
+Question 7.
+O que é o Spring Data JPA e qual é a sua função no contexto do desenvolvimento com Spring Boot?
+Sua resposta
+É uma biblioteca de persistência que facilita a comunicação com o banco de dados em uma aplicação Spring Boot.
