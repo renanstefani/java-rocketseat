@@ -1,0 +1,25 @@
+Question 1.
+Qual é o objetivo de utilizar a biblioteca Bcrypt na aplicação, como mencionado na aula?
+Sua resposta
+Criptografar as senhas antes de armazená-las no banco de dados.
+
+
+
+Question 2.
+Qual é o objetivo do filtro criado na aula?
+Sua resposta
+Autenticar o usuário antes de permitir o cadastro de uma tarefa.
+
+
+
+Question 3.
+Qual é a função do método doFilter no filtro criado na aula?
+Sua resposta
+Permitir que a requisição continue seu fluxo normal de processamento.
+
+
+
+Question 4.
+O que é um header HTTP e qual foi a sua importância na aula?
+Sua resposta
+Um header HTTP é uma parte da requisição ou resposta HTTP que contém informações sobre a requisição ou resposta.

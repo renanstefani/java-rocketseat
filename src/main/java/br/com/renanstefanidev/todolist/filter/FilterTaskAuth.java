@@ -25,43 +25,55 @@ public class FilterTaskAuth extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-                
-                // Resgatar dados da autenticação (usuário e senha)
-                var authorization = request.getHeader("Authorization");
-                
-                // substring "recorta" a string, nesse caso apontamos a length de Basic e com trim() removemos espaços
-                var authEncoded = authorization.substring("Basic".length()).trim();
-                
-                byte[] authDecode = Base64.getDecoder().decode(authEncoded);
-                
-                var authString = new String(authDecode);
-                
-                // Dividindo resultado do decode
-                // ["Renan S", "111111"]
-                String[] credentials = authString.split(":");
-                String username = credentials[0];
-                String password = credentials[1];
 
-                // Validar usuário
-                var user = this.userRepository.findByUsername(username);
+                // Verificando se o path é o tasks
+                var servletPath = request.getServletPath();
+                if(servletPath.equals("/tasks/")) {
 
-                if (user == null) {
-
-                    response.sendError(401);
-
-                } else {
+                    // Resgatar dados da autenticação (usuário e senha)
+                    var authorization = request.getHeader("Authorization");
                     
-                    // Validar senha
-                    var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
-                    // verified abaixo retorna um boolean
-                    if(passwordVerify.verified) {
-                        filterChain.doFilter(request, response);
-
-                    } else {
-                        response.sendError(401);
-                    }
-                    // Continuaremos
+                    // substring "recorta" a string, nesse caso apontamos a length de Basic e com trim() removemos espaços
+                    var authEncoded = authorization.substring("Basic".length()).trim();
+                    
+                    byte[] authDecode = Base64.getDecoder().decode(authEncoded);
+                    
+                    var authString = new String(authDecode);
+                    
+                    // Dividindo resultado do decode
+                    // ["Renan S", "111111"]
+                    String[] credentials = authString.split(":");
+                    String username = credentials[0];
+                    String password = credentials[1];
     
+                    // Validar usuário
+                    var user = this.userRepository.findByUsername(username);
+    
+                    if (user == null) {
+    
+                        response.sendError(401);
+    
+                    } else {
+                        
+                        // Validar senha
+                        var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+                        // verified abaixo retorna um boolean
+                        if(passwordVerify.verified) {
+                            // Dando continuidade
+
+                            // setando idUser fazendo a request user.getId
+                            request.setAttribute("idUser", user.getId());
+                            filterChain.doFilter(request, response);
+    
+                        } else {
+                            response.sendError(401);
+                        }
+        
+                    }
+                
+                // Caso o path não seja tasks
+                } else {
+                    filterChain.doFilter(request, response);
                 }
 
     }
