@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.renanstefanidev.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -22,7 +25,7 @@ public class TaskController {
     @Autowired
     private ITaskRepository taskRepository;
 
-    // Cadastrando Task
+    // (POST) Cadastrando Task 
     @PostMapping("/")
     public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
         // HttpServletRequest para fazer a requisição que setamos no FilterTaskAuth (request.setAttribute)
@@ -47,7 +50,7 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
 
-    // Listando Tasks cadastradas pelo usuário
+    // (GET) Listando Tasks cadastradas pelo usuário 
     @GetMapping("/")
     public List<TaskModel> list(HttpServletRequest request) {
 
@@ -56,5 +59,21 @@ public class TaskController {
         var tasks = this.taskRepository.findByIdUser((UUID) idUser);
 
         return tasks;
+    }
+
+    // (UPDATE) Atualizando uma task 
+    // Apontamos que o model da task está no body do arquivo TaskModel, 
+    // em seguida registramos a request para resgatar id do usuário,
+    // a annotation @PathVariable vai definir o id da task como variável no path (exemplo: http://localhost:8080/tasks/6565465-asdavbg-56484)
+    @PutMapping("/{id}")
+    public TaskModel update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
+        
+        // Encontrar a task ou retornar null
+        var task = this.taskRepository.findById(id).orElse(null);
+
+        // Copiando propriedades não nulas (source, target)
+        Utils.copyNonNullProperties(taskModel, task);
+
+        return this.taskRepository.save(task);
     }
 }
