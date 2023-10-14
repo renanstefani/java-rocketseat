@@ -16,6 +16,6 @@ FROM openjdk:17-jdk-slim
 # Expor a porta 8080
 EXPOSE 8080
 
-COPY --from=build /taget/todolist-1.0.0.jar app.jar
+COPY --from=build /target/todolist-1.0.0.jar app.jar
 
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
