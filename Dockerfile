@@ -9,8 +9,9 @@ COPY . .
 
 # Rodando comando para instalar o maven na máquina
 RUN apt-get install maven -y
-
 RUN mvn clean install
+
+FROM openjdk:17-jdk-slim
 
 # Expor a porta 8080
 EXPOSE 8080
