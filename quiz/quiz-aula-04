@@ -1,0 +1,39 @@
+Question 1.
+Qual é a condição para que toda a operação seja realizada no código discutido na aula?
+Sua resposta
+O servlet path deve ser igual a /tasks.
+
+
+
+Question 2.
+Qual é a finalidade de utilizar o método setAttribute no contexto do filtro e do controlador na aplicação discutida na aula?
+Sua resposta
+Enviar informações do filtro para o controlador.
+
+
+
+Question 3.
+Qual é o problema que a validação mencionada na aula visa resolver?
+Sua resposta
+Impedir que o usuário cadastre tarefas com datas futuras.
+
+
+
+Question 4.
+O que fizemos para garantir que apenas as tarefas relacionadas ao ID de usuário específico sejam retornadas na lista de tarefas?
+Sua resposta
+Utiliza um método findByIdUser no repositório de tarefas, passando o ID do usuário como parâmetro.
+
+
+
+Question 5.
+Como garantimos que a rota de atualização (PUT) contém o ID da tarefa que o usuário deseja alterar?
+Sua resposta
+O ID da tarefa é passado como um parâmetro de caminho (path variable) na URL.
+
+
+
+Question 6.
+Qual é o problema que o método copyNonNullProperties resolve no contexto da aula?
+Sua resposta
+Permite ao usuário mesclar propriedades não nulas de dois objetos.

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,14 +67,25 @@ public class TaskController {
     // em seguida registramos a request para resgatar id do usuário,
     // a annotation @PathVariable vai definir o id da task como variável no path (exemplo: http://localhost:8080/tasks/6565465-asdavbg-56484)
     @PutMapping("/{id}")
-    public TaskModel update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
+    public ResponseEntity update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id) {
         
         // Encontrar a task ou retornar null
         var task = this.taskRepository.findById(id).orElse(null);
+        if (task == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tarefa não encontrada");
+        }
+
+        // Verificar se usuário é o dono da task
+        var idUser = request.getAttribute("idUser");
+        if(!task.getIdUser().equals(idUser)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário não tem permissão para alterar essa tarefa");
+        }
 
         // Copiando propriedades não nulas (source, target)
         Utils.copyNonNullProperties(taskModel, task);
 
-        return this.taskRepository.save(task);
+        // Aplicando alterações
+        var taskUpdated = this.taskRepository.save(task);
+        return ResponseEntity.ok().body(taskUpdated);
     }
 }
